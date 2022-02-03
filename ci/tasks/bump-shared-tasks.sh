@@ -2,7 +2,13 @@
 
 set -eu
 
+pushd repo
+export ref=$(git rev-parse HEAD)
+popd
+
 pushd source-repo/ci
+
+sed "s/ref:.*/ref:${ref}/g" vendir.yml > vendir.yml
 
 vendir sync
 
