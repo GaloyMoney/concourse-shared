@@ -2,7 +2,7 @@
 ---
 
 git_uri: git@github.com:GaloyMoney/concourse-shared.git
-git_branch: ci-init
+git_branch: main
 github_private_key: ((github.private_key))
 github_token: ((github.api_token))
 
@@ -12,4 +12,4 @@ docker_registry_password: ((docker-creds.password))
 
 git_org_uri: git@github.com:GaloyMoney
 pr_branch: bump-shared-tasks
-source_repo_branch: vendir-sync-commons-start
+source_repo_branch: main
