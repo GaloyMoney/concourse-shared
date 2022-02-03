@@ -18,7 +18,7 @@ EOF
 
 gh pr close ${PR_BRANCH} || true
 gh pr create \
-  --title "chore(tasks): bump-tasks to ${new_ref}" \
+  --title "chore(tasks): bump shared tasks" \
   --body-file ../body.md \
   --base ${BRANCH} \
   --head ${PR_BRANCH} \
