@@ -8,8 +8,8 @@ popd
 
 pushd source-repo/ci
 
-cat vendir.yml | grep -oEi 'ref: (.*)' | head -n 1 | cut -d' ' -f 2 > ../refs/prev
-echo $ref > ../refs/new
+cat vendir.yml | grep -oEi 'ref: (.*)' | head -n 1 | cut -d' ' -f 2 > ../../refs/prev
+echo $ref > ../../refs/new
 
 sed -i "s/ref:.*/ref: ${ref}/g" vendir.yml
 
