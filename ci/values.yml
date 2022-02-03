@@ -11,3 +11,4 @@ docker_registry_password: ((docker-creds.password))
 
 git_org_uri: git@github.com:GaloyMoney
 pr_branch: bump-shared-tasks
+source_repo_branch: vendir-sync-commons-start

@@ -41,12 +41,27 @@ jobs:
         path: source-repo
       outputs:
       - name: source-repo
+      - name: refs
       run:
         path: pipeline-tasks/ci/tasks/bump-shared-tasks.sh
   - put: #@ repo_pr_branch_resource_name(repo)
     params:
       repository: source-repo
       force: true
+  - task: open-source-pr
+    config:
+      platform: linux
+      image_resource: #@ task_image_config()
+      inputs:
+      - name: refs
+      - name: pipeline-tasks
+      - name: #@ repo_resource_name(repo)
+        path: source-repo
+      params:
+        PR_BRANCH: #@ data.values.pr_branch
+        BRANCH: #@ data.values.source_repo_branch
+      run:
+        path: pipeline-tasks/ci/tasks/open-pr.sh
 #@ end
 
 resources:
@@ -81,5 +96,5 @@ resources:
   source:
     uri: #@ data.values.git_org_uri + "/" + repo + ".git"
     private_key: #@ data.values.github_private_key
-    branch: vendir-sync-commons-start
+    branch: #@ data.values.source_repo_branch
 #@ end
