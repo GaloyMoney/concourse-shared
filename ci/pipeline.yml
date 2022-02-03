@@ -60,6 +60,7 @@ jobs:
       params:
         PR_BRANCH: #@ data.values.pr_branch
         BRANCH: #@ data.values.source_repo_branch
+        GH_TOKEN: #@ data.values.github_token
       run:
         path: pipeline-tasks/ci/tasks/open-pr.sh
 #@ end

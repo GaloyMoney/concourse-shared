@@ -4,6 +4,7 @@
 git_uri: git@github.com:GaloyMoney/concourse-shared.git
 git_branch: ci-init
 github_private_key: ((github.private_key))
+github_token: ((github.api_token))
 
 docker_registry: us.gcr.io/galoy-org
 docker_registry_user: ((docker-creds.username))

@@ -19,7 +19,7 @@ EOF
 gh pr close ${PR_BRANCH} || true
 gh pr create \
   --title "chore(tasks): bump-tasks to ${new_ref}" \
-  --body-file ../body.md
+  --body-file ../body.md \
   --base ${BRANCH} \
   --head ${PR_BRANCH} \
   --label galoybot \
