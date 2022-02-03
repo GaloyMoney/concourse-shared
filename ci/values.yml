@@ -1,5 +1,8 @@
+#@data/values
+---
+
 git_uri: git@github.com:GaloyMoney/concourse-shared.git
-git_branch: main
+git_branch: ci-init
 github_private_key: ((github.private_key))
 
 docker_registry: us.gcr.io/galoy-org

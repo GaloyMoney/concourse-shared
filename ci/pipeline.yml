@@ -70,16 +70,16 @@ resources:
 - name: #@ repo_pr_branch_resource_name(repo)
   type: git
   source:
-    uri: #@ data.values.git_org_uri + "/" + repo_name + ".git"
+    uri: #@ data.values.git_org_uri + "/" + repo + ".git"
     private_key: #@ data.values.github_private_key
     branch: #@ data.values.pr_branch
 #@ end
 
 #@ for repo in src_repos:
-- name: #@ repo_resource_name(repo_name)
+- name: #@ repo_resource_name(repo)
   type: git
   source:
-    uri: #@ data.values.git_org_uri + "/" + repo_name + ".git"
+    uri: #@ data.values.git_org_uri + "/" + repo + ".git"
     private_key: #@ data.values.github_private_key
     branch: main
 #@ end
