@@ -81,5 +81,5 @@ resources:
   source:
     uri: #@ data.values.git_org_uri + "/" + repo + ".git"
     private_key: #@ data.values.github_private_key
-    branch: main
+    branch: vendir-sync-commons-start
 #@ end
