@@ -1,0 +1,85 @@
+#@ load("@ytt:data", "data")
+
+#@ src_repos = ["dealer"]
+
+#@ def pipeline_image():
+#@   return data.values.docker_registry + "/galoy-deployments-pipeline"
+#@ end
+
+#@ def task_image_config():
+type: registry-image
+source:
+  username: #@ data.values.docker_registry_user
+  password: #@ data.values.docker_registry_password
+  repository: #@ pipeline_image()
+#@ end
+
+#@ def repo_pr_branch_resource_name(repo_name):
+#@   return repo_name + "-pr-branch"
+#@ end
+
+#@ def repo_resource_name(repo_name):
+#@   return repo_name + "-repo"
+#@ end
+
+jobs:
+#@ for repo in src_repos:
+- name: #@ "bump-shared-tasks-in-" + repo
+  plan:
+  - in_parallel:
+    - { get: repo, trigger: true }
+    - { get: pipeline-tasks }
+    - get: #@ repo_resource_name(repo)
+  - task: #@ "bump-shared-tasks-" + repo
+    config:
+      platform: linux
+      image_resource: #@ task_image_config()
+      inputs:
+      - name: repo
+      - name: pipeline-tasks
+      - name: #@ repo_resource_name(repo)
+        path: source-repo
+      outputs:
+      - name: source-repo
+      run:
+        path: pipeline-tasks/ci/tasks/bump-shared-tasks.sh
+  - put: #@ repo_pr_branch_resource_name(repo)
+    params:
+      repository: source-repo
+      force: true
+#@ end
+
+resources:
+- name: repo
+  type: git
+  source:
+    ignore_paths: ["ci/*[^md]"]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
+
+- name: pipeline-tasks
+  type: git
+  source:
+    paths: [ci/tasks/*, Makefile]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
+
+#@ for repo in src_repos:
+- name: #@ repo_pr_branch_resource_name(repo)
+  type: git
+  source:
+    uri: #@ data.values.git_org_uri + "/" + repo_name + ".git"
+    private_key: #@ data.values.github_private_key
+    branch: #@ data.values.pr_branch
+#@ end
+
+#@ for repo in src_repos:
+- name: #@ repo_resource_name(repo_name)
+  type: git
+  source:
+    uri: #@ data.values.git_org_uri + "/" + repo_name + ".git"
+    private_key: #@ data.values.github_private_key
+    branch: main
+#@ end

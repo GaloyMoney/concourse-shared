@@ -1,0 +1,10 @@
+git_uri: git@github.com:GaloyMoney/concourse-shared.git
+git_branch: main
+github_private_key: ((github.private_key))
+
+docker_registry: us.gcr.io/galoy-org
+docker_registry_user: ((docker-creds.username))
+docker_registry_password: ((docker-creds.password))
+
+git_org_uri: git@github.com:GaloyMoney
+pr_branch: bump-shared-tasks
