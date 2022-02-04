@@ -2,18 +2,12 @@
 
 set -eu
 
-export prev_ref=$(cat refs/prev)
-export new_ref=$(cat refs/new)
-
 pushd source-repo
 
 cat <<EOF >> ../body.md
 # Bump Shared Tasks
 
-Code diff being added is for the following change in `concourse-shared`:
-
-https://github.com/GaloyMoney/concourse-shared/compare/${prev_ref}...${new_ref}
-
+This PR syncs in this repository, shared CI tasks from `concourse-shared`.
 EOF
 
 gh pr close ${PR_BRANCH} || true
