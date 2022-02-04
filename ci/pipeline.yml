@@ -41,7 +41,6 @@ jobs:
         path: source-repo
       outputs:
       - name: source-repo
-      - name: refs
       run:
         path: pipeline-tasks/ci/tasks/bump-shared-tasks.sh
   - put: #@ repo_pr_branch_resource_name(repo)
@@ -53,7 +52,6 @@ jobs:
       platform: linux
       image_resource: #@ task_image_config()
       inputs:
-      - name: refs
       - name: pipeline-tasks
       - name: #@ repo_resource_name(repo)
         path: source-repo
