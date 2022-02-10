@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 
-#@ src_repos = ["dealer", "galoy", "admin-panel"]
+#@ src_repos = ["dealer", "galoy", "admin-panel", "galoy-pay", "galoy-client", "galoy-react"]
 
 #@ def pipeline_image():
 #@   return data.values.docker_registry + "/galoy-deployments-pipeline"
