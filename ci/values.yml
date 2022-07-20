@@ -13,3 +13,12 @@ docker_registry_password: ((docker-creds.password))
 git_org_uri: git@github.com:GaloyMoney
 pr_branch: bump-shared-tasks
 source_repo_branch: main
+
+src_repos:
+- galoy
+- admin-panel
+- galoy-pay
+- galoy-client
+- galoy-react
+- dealer
+- dealer-services

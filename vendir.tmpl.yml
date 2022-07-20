@@ -1,0 +1,23 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+
+directories:
+- path: tasks/vendor
+  contents:
+  - path: .
+    git:
+      url: https://github.com/GaloyMoney/concourse-shared.git
+      ref: dummy
+    includePaths:
+    - tasks/**/*
+    newRootPath: tasks
+
+- path: config/vendor
+  contents:
+  - path: .
+    git:
+      url: https://github.com/GaloyMoney/concourse-shared.git
+      ref: dummy
+    includePaths:
+    - config/**/*
+    newRootPath: config
