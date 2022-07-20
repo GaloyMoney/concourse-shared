@@ -1,7 +1,5 @@
 #@ load("@ytt:data", "data")
 
-#@ src_repos = ["dealer", "galoy", "admin-panel", "galoy-pay", "galoy-client", "galoy-react"]
-
 #@ def pipeline_image():
 #@   return data.values.docker_registry + "/galoy-deployments-pipeline"
 #@ end
@@ -23,7 +21,7 @@ source:
 #@ end
 
 jobs:
-#@ for repo in src_repos:
+#@ for repo in data.values.src_repos:
 - name: #@ "bump-shared-tasks-in-" + repo
   plan:
   - in_parallel:
@@ -80,7 +78,7 @@ resources:
     branch: #@ data.values.git_branch
     private_key: #@ data.values.github_private_key
 
-#@ for repo in src_repos:
+#@ for repo in data.values.src_repos:
 - name: #@ repo_pr_branch_resource_name(repo)
   type: git
   source:
@@ -89,7 +87,7 @@ resources:
     branch: #@ data.values.pr_branch
 #@ end
 
-#@ for repo in src_repos:
+#@ for repo in data.values.src_repos:
 - name: #@ repo_resource_name(repo)
   type: git
   source:
