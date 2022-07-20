@@ -24,5 +24,5 @@ fi
   cd $(git rev-parse --show-toplevel)
   git add -A
   git status
-  git commit -m "chore(tasks): Bump shared tasks"
+  git commit -m "ci(shared): bump vendored ci files"
 )
