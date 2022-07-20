@@ -7,7 +7,7 @@ pushd source-repo
 cat <<EOF >> ../body.md
 # Bump Shared Tasks
 
-This PR syncs in this repository, shared CI tasks from \`concourse-shared\`.
+This PR syncs in this repository, shared CI tasks from [concourse-shared](https://github.com/galoy/concourse-shared).
 EOF
 
 gh pr close ${PR_BRANCH} || true
