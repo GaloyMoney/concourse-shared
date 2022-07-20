@@ -12,7 +12,7 @@ EOF
 
 gh pr close ${PR_BRANCH} || true
 gh pr create \
-  --title "chore(tasks): bump shared tasks" \
+  --title "ci(vendored): bump vendored ci files" \
   --body-file ../body.md \
   --base ${BRANCH} \
   --head ${PR_BRANCH} \
