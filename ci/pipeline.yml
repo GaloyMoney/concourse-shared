@@ -21,6 +21,30 @@ source:
 #@ end
 
 jobs:
+- name: build-nodejs-image
+  serial: true
+  plan:
+  - {get: nodejs-image-def, trigger: true}
+  - task: build
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: nodejs-image-def
+      outputs:
+      - name: image
+      params:
+        CONTEXT: nodejs-image-def/images/nodejs-concourse
+      run:
+        path: build
+  - put: nodejs-image
+    params:
+      image: image/image.tar
+
 #@ for repo in data.values.src_repos:
 - name: #@ "bump-shared-tasks-in-" + repo
   plan:
@@ -95,3 +119,19 @@ resources:
     private_key: #@ data.values.github_private_key
     branch: #@ data.values.source_repo_branch
 #@ end
+
+- name: nodejs-image-def
+  type: git
+  source:
+    paths: [images/nodejs-concourse/Dockerfile]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
+
+- name: nodejs-image
+  type: registry-image
+  source:
+    tag: latest
+    username: #@ data.values.docker_registry_user
+    password: #@ data.values.docker_registry_password
+    repository: #@ data.values.docker_registry + "/nodejs-concourse"
