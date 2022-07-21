@@ -12,4 +12,3 @@ directories:
     - tasks/**/*
     - config/**/*
     - pipeline-fragments.lib.yml
-    newRootPath: tasks
