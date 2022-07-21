@@ -103,6 +103,27 @@ plan:
 on_failure: #@ slack_failure_notification()
 #@ end
 
+#@ def repo_resource():
+name: repo
+type: git
+source:
+  ignore_paths: ["ci/*[^md]"]
+  fetch_tags: true
+  uri: #@ data.values.git_uri
+  branch: #@ data.values.git_branch
+  private_key: #@ data.values.github_private_key
+#@ end
+
+#@ def pipeline_tasks_resource():
+name: pipeline-tasks
+type: git
+source:
+  paths: [ci/vendor/*, ci/tasks/*, ci/config/*, Makefile]
+  uri: #@ data.values.git_uri
+  branch: #@ data.values.git_branch
+  private_key: #@ data.values.github_private_key
+#@ end
+
 #@ def nodejs_deps_resource():
 name: deps
 type: git
@@ -140,15 +161,16 @@ source:
   url: #@ data.values.slack_webhook_url
 #@ end
 
-#@ def additional_resource_types():
-resource_types:
-- name: gcs-resource
-  type: docker-image
-  source:
-    repository: frodenas/gcs-resource
+#@ def gcr_resource_type():
+name: gcs-resource
+type: docker-image
+source:
+  repository: frodenas/gcs-resource
+#@ end
 
-- name: slack-notification
-  type: docker-image
-  source:
-    repository: cfcommunity/slack-notification-resource
+#@ def slack_resource_type():
+name: slack-notification
+type: docker-image
+source:
+  repository: cfcommunity/slack-notification-resource
 #@ end
