@@ -1,7 +1,8 @@
+#@ load("@ytt:data", "data")
 
 #@ def public_docker_registry():
 #@  return "us.gcr.io/galoy-org"
-#@
+#@ end
 
 #@ def nodejs_concourse_image():
 #@   return public_docker_registry() + "/nodejs-concourse"
@@ -92,18 +93,31 @@ source:
   key: #@ data.values.gh_repository + "-artifacts/versions/deps"
 #@ end
 
-#@ def nodejs_deps_resource():
-- name: bundled-deps
-  type: gcs-resource
-  source:
-    bucket: ((staging-gcp-creds.bucket_name))
-    json_key: ((staging-gcp-creds.creds_json))
-    regexp: #@ data.values.gh_repository + "-artifacts/deps/bundled-deps-v(.*)-.*.tgz"
-#@
+#@ def bundled_deps_resource():
+name: bundled-deps
+type: gcs-resource
+source:
+  bucket: ((staging-gcp-creds.bucket_name))
+  json_key: ((staging-gcp-creds.creds_json))
+  regexp: #@ data.values.gh_repository + "-artifacts/deps/bundled-deps-v(.*)-.*.tgz"
+#@ end
 
 #@ def slack_resource():
-- name: slack
-  type: slack-notification
+name: slack
+type: slack-notification
+source:
+  url: #@ data.values.slack_webhook_url
+#@ end
+
+#@ def additional_resource_types():
+resource_types:
+- name: gcs-resource
+  type: docker-image
   source:
-    url: #@ data.values.slack_webhook_url
-#@
+    repository: frodenas/gcs-resource
+
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+#@ end
