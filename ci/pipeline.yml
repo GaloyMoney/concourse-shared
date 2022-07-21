@@ -20,8 +20,18 @@ source:
 #@   return repo_name + "-repo"
 #@ end
 
+groups:
+- name: bump-shared-files
+  jobs:
+#@ for repo in data.values.src_repos:
+  - #@ "bump-shared-files-in-" + repo
+#@ end
+- name: images
+  jobs:
+  - build-nodejs-concourse-image
+
 jobs:
-- name: build-nodejs-image
+- name: build-nodejs-concourse-image
   serial: true
   plan:
   - {get: nodejs-image-def, trigger: true}
@@ -46,25 +56,26 @@ jobs:
       image: image/image.tar
 
 #@ for repo in data.values.src_repos:
-- name: #@ "bump-shared-tasks-in-" + repo
+- name: #@ "bump-shared-files-in-" + repo
   plan:
   - in_parallel:
-    - { get: repo, trigger: true }
+    - { get: shared-files, trigger: true }
     - { get: pipeline-tasks }
     - get: #@ repo_resource_name(repo)
-  - task: #@ "bump-shared-tasks-" + repo
+  - task: #@ "bump-shared-files-" + repo
     config:
       platform: linux
       image_resource: #@ task_image_config()
       inputs:
-      - name: repo
+      - name: shared-files
+        path: repo
       - name: pipeline-tasks
       - name: #@ repo_resource_name(repo)
         path: source-repo
       outputs:
       - name: source-repo
       run:
-        path: pipeline-tasks/ci/tasks/bump-shared-tasks.sh
+        path: pipeline-tasks/ci/tasks/bump-shared-files.sh
   - put: #@ repo_pr_branch_resource_name(repo)
     params:
       repository: source-repo
@@ -86,10 +97,13 @@ jobs:
 #@ end
 
 resources:
-- name: repo
+- name: shared-files
   type: git
   source:
-    ignore_paths: ["ci/*[^md]"]
+    paths:
+    - tasks
+    - config
+    - pipeline-fragment.lib.yml
     uri: #@ data.values.git_uri
     branch: #@ data.values.git_branch
     private_key: #@ data.values.github_private_key
