@@ -25,8 +25,8 @@ mkdir ~/.ssh
 cp ${CI_ROOT}/login.ssh ~/.ssh/id_rsa
 cp ${CI_ROOT}/login.ssh.pub ~/.ssh/id_rsa.pub
 
-export DOCKER_HOST=ssh://${DOCKER_HOST_USER}@${DOCKER_HOST_IP}
 export DOCKER_HOST_USER="sa_$(cat ${CI_ROOT}/gcloud-creds.json  | jq -r '.client_id')"
+export DOCKER_HOST=ssh://${DOCKER_HOST_USER}@${DOCKER_HOST_IP}
 export ADDITIONAL_SSH_OPTS="-o StrictHostKeyChecking=no -i ${CI_ROOT}/login.ssh"
 
 pushd ${REPO_PATH}
