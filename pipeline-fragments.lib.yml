@@ -103,7 +103,7 @@ plan:
 on_failure: #@ slack_failure_notification()
 #@ end
 
-#@ def nodejs_audit():
+#@ def nodejs_audit(level = "high"):
 name: audit
 serial: true
 plan:
@@ -117,6 +117,8 @@ plan:
     inputs:
     - name: pipeline-tasks
     - name: repo
+    params:
+      LEVEL: #@ level
     run:
       path: pipeline-tasks/ci/vendor/tasks/nodejs-audit.sh
 on_failure: #@ slack_failure_notification()
