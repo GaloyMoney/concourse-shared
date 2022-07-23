@@ -119,6 +119,7 @@ plan:
     - name: repo
     params:
       LEVEL: #@ level
+      REPO_ROOT: repo
     run:
       path: pipeline-tasks/ci/vendor/tasks/nodejs-audit.sh
 on_failure: #@ slack_failure_notification()

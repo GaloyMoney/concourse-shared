@@ -2,9 +2,10 @@
 
 set -eu
 
-LEVEL=${LEVEL:?high}
+REPO_ROOT=${REPO_ROOT:-./}
+LEVEL=${LEVEL:-high}
 
-pushd repo
+pushd ${REPO_ROOT}
 
 yarn audit --level ${LEVEL}
 
