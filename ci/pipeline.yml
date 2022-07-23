@@ -103,6 +103,7 @@ resources:
     paths:
     - tasks
     - config
+    - actions
     - pipeline-fragments.lib.yml
     - vendir.tmpl.yml
     uri: #@ data.values.git_uri

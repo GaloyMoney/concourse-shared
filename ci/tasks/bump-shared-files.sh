@@ -6,12 +6,19 @@ pushd repo
 export ref=$(git rev-parse HEAD)
 popd
 
-pushd source-repo/ci
+pushd source-repo
 
-cp ../../repo/vendir.tmpl.yml ./vendir.yml
+cp ../../repo/vendir.tmpl.yml ./ci/vendir.yml
 sed -i "s/ref:.*/ref: ${ref}/g" vendir.yml
 
+pushd ci
 vendir sync
+popd
+
+if [[ -f ./yarn.lock ]]; then
+  mkdir -p ./.github/workflows
+  cp ./ci/vendor/actions/nodejs-*.yml ./.github/workflows/
+fi
 
 if [[ -z $(git config --global user.email) ]]; then
   git config --global user.email "bot@galoy.io"

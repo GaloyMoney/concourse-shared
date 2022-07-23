@@ -11,4 +11,5 @@ directories:
     includePaths:
     - tasks/**/*
     - config/**/*
+    - actions/**/*
     - pipeline-fragments.lib.yml
