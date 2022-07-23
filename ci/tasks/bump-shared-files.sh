@@ -8,8 +8,7 @@ popd
 
 pushd source-repo
 
-cp ../../repo/vendir.tmpl.yml ./ci/vendir.yml
-sed -i "s/ref:.*/ref: ${ref}/g" vendir.yml
+sed "s/ref:.*/ref: ${ref}/g" ../repo/vendir.tmpl.yml > ./ci/vendir.yml
 
 pushd ci
 vendir sync
