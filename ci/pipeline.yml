@@ -74,7 +74,7 @@ jobs:
       outputs:
       - name: image
       params:
-        CONTEXT: release-pipeline-image-def/ci/image
+        CONTEXT: release-pipeline-image-def/images/release
       run:
         path: build
   - put: release-pipeline-image
