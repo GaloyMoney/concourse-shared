@@ -287,7 +287,7 @@ source:
   url: #@ data.values.slack_webhook_url
 #@ end
 
-#@ def version_resouce():
+#@ def version_resource():
 name: version
 type: semver
 source:
@@ -308,7 +308,7 @@ source:
   private_key: #@ data.values.github_private_key
 #@ end
 
-#@ def versiones_image_resource():
+#@ def versioned_image_resource():
 name: versioned-image
 type: registry-image
 source:
