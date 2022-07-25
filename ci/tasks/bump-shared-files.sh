@@ -25,6 +25,8 @@ if [[ -f ./docker-compose.yml ]]; then
   cp ./ci/vendor/actions/test-integration.yml
 fi
 
+[[ ! -f ./typos.toml ]] && touch typos.toml
+
 if [[ -z $(git config --global user.email) ]]; then
   git config --global user.email "bot@galoy.io"
 fi
