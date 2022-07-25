@@ -19,8 +19,6 @@ if [[ -f ./yarn.lock ]]; then
   cp ./ci/vendor/actions/nodejs-*.yml ./.github/workflows/
 fi
 
-cp ./ci/vendor/actions/make-*.yml ./.github/workflows/
-
 if [[ -z $(git config --global user.email) ]]; then
   git config --global user.email "bot@galoy.io"
 fi
