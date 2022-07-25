@@ -25,7 +25,7 @@ if [[ ! -f ./typos.toml ]]; then
 fi
 
 if [[ -f ./docker-compose.yml ]]; then
-  cp ./ci/vendor/actions/test-integration.yml
+  cp ./ci/vendor/actions/test-integration.yml ./.github/workflows
 fi
 
 if [[ -z $(git config --global user.email) ]]; then
