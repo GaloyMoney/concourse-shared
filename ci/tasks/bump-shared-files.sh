@@ -14,9 +14,15 @@ pushd ci
 vendir sync
 popd
 
+mkdir -p ./.github/workflows
 if [[ -f ./yarn.lock ]]; then
-  mkdir -p ./.github/workflows
   cp ./ci/vendor/actions/nodejs-*.yml ./.github/workflows/
+fi
+
+cp ./ci/vendor/actions/spelling.yml ./.github/workflows
+
+if [[ -f ./docker-compose.yml ]]; then
+  cp ./ci/vendor/actions/test-integration.yml
 fi
 
 if [[ -z $(git config --global user.email) ]]; then
