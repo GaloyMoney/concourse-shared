@@ -29,6 +29,7 @@ groups:
 - name: images
   jobs:
   - build-nodejs-concourse-image
+  - build-release-pipeline-image
 
 jobs:
 - name: build-nodejs-concourse-image
@@ -54,6 +55,32 @@ jobs:
   - put: nodejs-image
     params:
       image: image/image.tar
+
+- name: build-release-pipeline-image
+  serial: true
+  plan:
+  - get: release-pipeline-image-def
+    trigger: true
+  - task: build
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: release-pipeline-image-def
+      outputs:
+      - name: image
+      params:
+        CONTEXT: release-pipeline-image-def/ci/image
+      run:
+        path: build
+  - put: release-pipeline-image
+    params:
+      image: image/image.tar
+
 
 #@ for repo in data.values.src_repos:
 - name: #@ "bump-shared-files-in-" + repo
@@ -149,3 +176,19 @@ resources:
     username: #@ data.values.docker_registry_user
     password: #@ data.values.docker_registry_password
     repository: #@ data.values.docker_registry + "/nodejs-concourse"
+  
+- name: release-pipeline-image
+  type: registry-image
+  source:
+    tag: latest
+    username: #@ data.values.docker_registry_user
+    password: #@ data.values.docker_registry_password
+    repository: #@ pipeline_image()
+
+- name: release-pipeline-image-def
+  type: git
+  source:
+    paths: [images/release/Dockerfile]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
