@@ -183,7 +183,7 @@ resources:
     tag: latest
     username: #@ data.values.docker_registry_user
     password: #@ data.values.docker_registry_password
-    repository: #@ pipeline_image()
+    repository: #@   data.values.docker_registry + "/release-pipeline"
 
 - name: release-pipeline-image-def
   type: git
