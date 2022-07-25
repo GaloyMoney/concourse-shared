@@ -101,10 +101,8 @@ resources:
   type: git
   source:
     paths:
-    - tasks
-    - config
-    - actions
-    - pipeline-fragments.lib.yml
+    - shared/**/*
+    - shared/*
     - vendir.tmpl.yml
     uri: #@ data.values.git_uri
     branch: #@ data.values.git_branch
