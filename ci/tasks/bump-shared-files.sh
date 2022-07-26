@@ -17,6 +17,7 @@ popd
 mkdir -p ./.github/workflows
 if [[ -f ./yarn.lock ]]; then
   cp ./ci/vendor/actions/nodejs-*.yml ./.github/workflows/
+  cp ./ci/vendor/nodejs-dependabot.yml ./.github/dependabot.yml
 fi
 
 cp ./ci/vendor/actions/spelling.yml ./.github/workflows
