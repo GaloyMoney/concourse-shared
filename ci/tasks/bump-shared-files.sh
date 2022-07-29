@@ -18,6 +18,10 @@ popd
 mkdir -p ./.github/workflows
 if [[ -f ./yarn.lock ]]; then
   cp ./ci/vendor/actions/nodejs-*.yml ./.github/workflows/
+  # exclude audit from main backend
+  if [[ -f ./.github/workflows/audit.yml ]]; then
+    rm ./.github/workflows/nodejs-audit.yml
+  fi
   cp ./ci/vendor/nodejs-dependabot.yml ./.github/dependabot.yml
 fi
 
