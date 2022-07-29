@@ -28,10 +28,35 @@ groups:
 #@ end
 - name: images
   jobs:
+  - build-rust-concourse-image
   - build-nodejs-concourse-image
   - build-release-pipeline-image
 
 jobs:
+- name: build-rust-concourse-image
+  serial: true
+  plan:
+  - {get: rust-image-def, trigger: true}
+  - task: build
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: rust-image-def
+      outputs:
+      - name: image
+      params:
+        CONTEXT: rust-image-def/images/rust-concourse
+      run:
+        path: build
+  - put: rust-image
+    params:
+      image: image/image.tar
+
 - name: build-nodejs-concourse-image
   serial: true
   plan:
@@ -176,6 +201,22 @@ resources:
     username: #@ data.values.docker_registry_user
     password: #@ data.values.docker_registry_password
     repository: #@ data.values.docker_registry + "/nodejs-concourse"
+
+- name: rust-image-def
+  type: git
+  source:
+    paths: [images/rust-concourse/Dockerfile]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
+
+- name: rust-image
+  type: registry-image
+  source:
+    tag: latest
+    username: #@ data.values.docker_registry_user
+    password: #@ data.values.docker_registry_password
+    repository: #@ data.values.docker_registry + "/rust-concourse"
   
 - name: release-pipeline-image
   type: registry-image
