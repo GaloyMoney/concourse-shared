@@ -8,6 +8,7 @@ popd
 
 pushd source-repo
 
+mkdir -p ci
 sed "s/ref:.*/ref: ${ref}/g" ../repo/vendir.tmpl.yml > ./ci/vendir.yml
 
 pushd ci
