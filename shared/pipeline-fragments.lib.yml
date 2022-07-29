@@ -8,6 +8,10 @@
 #@   return public_docker_registry() + "/nodejs-concourse"
 #@ end
 
+#@ def rust_concourse_image():
+#@   return public_docker_registry() + "/rust-concourse"
+#@ end
+
 #@ def release_concourse_image():
 #@   return public_docker_registry() + "/release-pipeline"
 #@ end
@@ -18,6 +22,14 @@ source:
   username: ((docker-creds.username))
   password: ((docker-creds.password))
   repository: #@ nodejs_concourse_image()
+#@ end
+
+#@ def rust_task_image_config():
+type: registry-image
+source:
+  username: ((docker-creds.username))
+  password: ((docker-creds.password))
+  repository: #@ rust_concourse_image()
 #@ end
 
 #@ def release_task_image_config():
