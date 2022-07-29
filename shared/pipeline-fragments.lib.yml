@@ -71,7 +71,7 @@ plan:
 on_failure: #@ slack_failure_notification()
 #@ end
 
-#@ def check_code():
+#@ def rust_check_code():
 name: check-code
 serial: true
 plan:
@@ -81,7 +81,7 @@ plan:
 - task: check-code
   config:
     platform: linux
-    image_resource: #@ nodejs_task_image_config()
+    image_resource: #@ rust_task_image_config()
     inputs:
     - name: pipeline-tasks
     - name: repo
@@ -149,7 +149,7 @@ plan:
 on_failure: #@ slack_failure_notification()
 #@ end
 
-#@ def integration_test():
+#@ def rust_integration_test():
 name: test-integration
 serial: true
 plan:
@@ -161,7 +161,7 @@ plan:
   tags: ["galoy-staging"]
   config:
     platform: linux
-    image_resource: #@ nodejs_task_image_config()
+    image_resource: #@ rust_task_image_config()
     inputs:
     - name: bundled-deps
     - name: pipeline-tasks
