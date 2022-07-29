@@ -4,4 +4,4 @@ RUN rustc --version
 
 RUN rustup component add clippy
 
-RUN cargo install cargo-nextest cargo-deny cargo-audit
+RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli
