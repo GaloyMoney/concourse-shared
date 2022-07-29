@@ -21,6 +21,10 @@ if [[ -f ./yarn.lock ]]; then
   cp ./ci/vendor/nodejs-dependabot.yml ./.github/dependabot.yml
 fi
 
+if [[ -f ./Cargo.toml ]]; then
+  cp ./ci/vendor/rust-dependabot.yml ./.github/dependabot.yml
+fi
+
 cp ./ci/vendor/actions/spelling.yml ./.github/workflows
 if [[ ! -f ./typos.toml ]]; then
   touch typos.toml

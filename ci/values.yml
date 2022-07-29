@@ -18,7 +18,7 @@ src_repos:
 - galoy
 - admin-panel
 - galoy-pay
+- stablesats-rs
 - galoy-client
 - galoy-react
 - dealer
-- dealer-services
