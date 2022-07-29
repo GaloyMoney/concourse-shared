@@ -16,5 +16,4 @@ gh pr create \
   --body-file ../body.md \
   --base ${BRANCH} \
   --head ${PR_BRANCH} \
-  --label galoybot \
-  --label shared-tasks
+  --label galoybot
