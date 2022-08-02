@@ -29,7 +29,7 @@ ARG KUBECTL_VERSION=v1.21.9
 ARG KUBECTL_SHASUM=195d5387f2a6ca7b8ab5c2134b4b6cc27f29372f54b771947ba7c18ee983fbe6
 RUN curl -LO https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
   && curl -LO https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256 \
-  && echo $KUBECTL_SHASUM kubectl | sha256sum --check \
+  && echo $KUBECTL_SHASUM kubectl | sha256sum -c \
   && chmod +x ./kubectl \
   && mv ./kubectl /usr/local/bin
 
