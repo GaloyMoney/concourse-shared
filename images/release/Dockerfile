@@ -25,6 +25,13 @@ RUN wget https://github.com/helm/chart-releaser/releases/download/v${CR_VERSION}
   && chmod +x /usr/local/bin/cr \
   && rm LICENSE README.md
 
+ARG KUBECTL_VERSION=v1.21.9
+RUN curl -LO https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
+  && curl -LO https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256 \
+  && echo "$(cat kubectl.sha256) kubectl" | sha256sum --check \
+  && chmod +x ./kubectl \
+  && mv ./kubectl /usr/local/bin
+
 # Cache repository, used frequently during chart releasing
 RUN helm repo add bitnami https://charts.bitnami.com/bitnami
 
