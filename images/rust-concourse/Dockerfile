@@ -2,9 +2,10 @@ FROM rust
 
 RUN rustc --version
 
+RUN rustup component add rustfmt
 RUN rustup component add clippy
 
-RUN cargo install cargo-fmt cargo-nextest cargo-deny cargo-audit typos-cli
+RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli
 
 # Install gcloud
 RUN curl -sSL https://sdk.cloud.google.com | bash
