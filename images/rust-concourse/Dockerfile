@@ -5,7 +5,7 @@ RUN rustc --version
 RUN rustup component add rustfmt
 RUN rustup component add clippy
 
-RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli
+RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli sqlx-cli
 
 # Install gcloud
 RUN curl -sSL https://sdk.cloud.google.com | bash
