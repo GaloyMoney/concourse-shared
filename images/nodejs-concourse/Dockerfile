@@ -30,3 +30,10 @@ RUN mkdir ghcli && cd ghcli \
 ENV BUF_VERSION 1.4.0
 RUN wget https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-x86_64 -O buf \
   && chmod +x buf && mv buf /usr/local/bin
+
+# Install mongodb client
+RUN apt-get update && apt-get install -y dirmngr gnupg apt-transport-https software-properties-common ca-certificates curl && \
+    curl -fsSL https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - && \
+    echo "deb [arch=$(dpkg --print-architecture)] https://repo.mongodb.org/apt/debian bullseye/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && \
+    apt-get install -y mongodb-mongosh
