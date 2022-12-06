@@ -2,7 +2,7 @@
 ---
 
 git_uri: git@github.com:GaloyMoney/concourse-shared.git
-git_branch: feat--selective-features
+git_branch: main
 github_private_key: ((github.private_key))
 github_token: ((github.api_token))
 
