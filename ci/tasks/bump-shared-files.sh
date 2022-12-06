@@ -13,11 +13,14 @@ sed "s/ref:.*/ref: ${ref}/g" ../repo/vendir.tmpl.yml > ./ci/vendir.yml
 
 echo $FEATURES | jq -c '.[]' | while read feat_str; do
   feat=$(echo $feat_str | tr -d '"')
+
+  # removes the features we need from excludePaths in vendir yaml
   sed -i "/\b\($feat-*\)\b/d" ./ci/vendir.yml
 done
 
 pushd ci
 vendir sync
+ls -R .
 rm vendir.*
 popd
 
@@ -25,9 +28,9 @@ pushd .github/workflows
 cp -r vendor/* .
 rm -rf vendor
 
-mv ../../ci/vendor/config/*-dependabot.yml ../dependabot.yml || true
-
 popd
+
+mv ci/vendor/config/*-dependabot.yml .github/dependabot.yml || true
 
 if [[ ! -f ./typos.toml ]]; then
   touch typos.toml
