@@ -15,7 +15,7 @@ echo $FEATURES | jq -c '.[]' | while read feat; do
   sed -i "/\b\($feat-\*\)\b/d" ./ci/vendir.yml
 done
 
-cat vendir.yml
+cat ./ci/vendir.yml
 exit 0
 
 pushd ci
