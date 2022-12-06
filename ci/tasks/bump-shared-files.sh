@@ -23,10 +23,10 @@ vendir sync
 rm vendir.*
 
 pushd vendor/tasks
-rename -v nodejs- "" *
-rename -v rust- "" *
-rename -v docker- "" *
-rename -v chart- "" *
+rename 's/^nodejs-//' *
+rename 's/^rust-//' *
+rename 's/^docker-//' *
+rename 's/^chart-//' *
 popd
 
 popd
@@ -35,10 +35,10 @@ pushd .github/workflows
 cp -r vendor/* .
 rm -rf vendor
 
-rename -v nodejs- "" *
-rename -v rust- "" *
-rename -v docker- "" *
-rename -v chart- "" *
+rename 's/^nodejs-//' *
+rename 's/^rust-//' *
+rename 's/^docker-//' *
+rename 's/^chart-//' *
 
 popd
 
