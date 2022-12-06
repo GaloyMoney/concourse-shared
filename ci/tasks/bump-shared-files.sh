@@ -2,8 +2,6 @@
 
 set -eu
 
-echo $FEATURES
-
 pushd repo
 export ref=$(git rev-parse HEAD)
 popd
@@ -12,6 +10,13 @@ pushd source-repo
 
 mkdir -p ci
 sed "s/ref:.*/ref: ${ref}/g" ../repo/vendir.tmpl.yml > ./ci/vendir.yml
+
+echo $FEATURES | jq -c '.[]' | while read feat; do
+  sed -i "/\b\($feat-\*\)\b/d" ./ci/vendir.yml
+done
+
+cat vendir.yml
+exit 0
 
 pushd ci
 vendir sync

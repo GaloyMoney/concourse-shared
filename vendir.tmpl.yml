@@ -12,7 +12,11 @@ directories:
       depth: 1
     includePaths:
     - shared/actions/*
-    excludePaths: []
+    excludePaths:
+    - shared/actions/nodejs-*
+    - shared/actions/rust-*
+    - shared/actions/docker-*
+    - shared/actions/chart-*
     newRootPath: shared/actions
 
 - path: ./vendor
@@ -24,5 +28,9 @@ directories:
       depth: 1
     includePaths:
     - shared/ci/**/*
-    excludePaths: []
+    excludePaths:
+    - shared/ci/**/nodejs-*
+    - shared/ci/**/rust-*
+    - shared/ci/**/chart-*
+    - shared/ci/**/docker-*
     newRootPath: shared/ci
