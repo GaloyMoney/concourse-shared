@@ -22,7 +22,7 @@ pushd ci
 vendir sync
 rm vendir.*
 
-pushd tasks
+pushd vendor/tasks
 rename -v nodejs- "" *
 rename -v rust- "" *
 rename -v docker- "" *
