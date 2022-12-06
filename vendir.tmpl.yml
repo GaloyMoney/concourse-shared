@@ -23,6 +23,6 @@ directories:
       ref: feat--selective-features
       depth: 1
     includePaths:
-    - shared/ci/*
+    - shared/ci/**/*
     excludePaths: []
     newRootPath: shared/ci

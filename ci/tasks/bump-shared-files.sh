@@ -2,6 +2,8 @@
 
 set -eu
 
+echo $FEATURES
+
 pushd repo
 export ref=$(git rev-parse HEAD)
 popd
