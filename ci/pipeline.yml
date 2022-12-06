@@ -126,6 +126,8 @@ jobs:
         path: source-repo
       outputs:
       - name: source-repo
+      params:
+        FEATURES: #@ data.values.src_repos[repo]
       run:
         path: pipeline-tasks/ci/tasks/bump-shared-files.sh
   - put: #@ repo_pr_branch_resource_name(repo)
