@@ -27,6 +27,7 @@ rename 's/^nodejs-//' *
 rename 's/^rust-//' *
 rename 's/^docker-//' *
 rename 's/^chart-//' *
+chmod +x *
 popd
 
 popd
