@@ -3,9 +3,9 @@ kind: Config
 
 # Relative to ci/
 directories:
-- path: ../.github/workflows
+- path: ../.github/workflows/vendor
   contents:
-  - path: vendor # Copy this folder out to ..
+  - path: . # Copy this folder out to ..
     git:
       url: https://github.com/GaloyMoney/concourse-shared.git
       ref: main
