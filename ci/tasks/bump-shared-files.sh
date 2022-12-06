@@ -20,13 +20,26 @@ done
 
 pushd ci
 vendir sync
-ls -R .
 rm vendir.*
+
+pushd tasks
+rename -v nodejs- "" *
+rename -v rust- "" *
+rename -v docker- "" *
+rename -v chart- "" *
+popd
+
 popd
 
 pushd .github/workflows
 cp -r vendor/* .
 rm -rf vendor
+
+rename -v nodejs- "" *
+rename -v rust- "" *
+rename -v docker- "" *
+rename -v chart- "" *
+
 popd
 
 mv ci/vendor/config/*-dependabot.yml .github/dependabot.yml || true
