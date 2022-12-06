@@ -11,7 +11,8 @@ pushd source-repo
 mkdir -p ci
 sed "s/ref:.*/ref: ${ref}/g" ../repo/vendir.tmpl.yml > ./ci/vendir.yml
 
-echo $FEATURES | jq -c '.[]' | while read feat; do
+echo $FEATURES | jq -c '.[]' | while read feat_str; do
+  feat=$(echo $feat_str | tr -d '"')
   sed -i "/\b\($feat-\*\)\b/d" ./ci/vendir.yml
 done
 
