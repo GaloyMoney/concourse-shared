@@ -27,7 +27,6 @@ popd
 pushd .github/workflows
 cp -r vendor/* .
 rm -rf vendor
-
 popd
 
 mv ci/vendor/config/*-dependabot.yml .github/dependabot.yml || true
