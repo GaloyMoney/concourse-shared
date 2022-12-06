@@ -8,8 +8,7 @@ directories:
   - path: vendor # Copy this folder out to ..
     git:
       url: https://github.com/GaloyMoney/concourse-shared.git
-      ref: feat--selective-features
-      depth: 1
+      ref: main
     includePaths:
     - shared/actions/*
     excludePaths:
@@ -24,8 +23,7 @@ directories:
   - path: .
     git:
       url: https://github.com/GaloyMoney/concourse-shared.git
-      ref: feat--selective-features
-      depth: 1
+      ref: main
     includePaths:
     - shared/ci/**/*
     excludePaths:
