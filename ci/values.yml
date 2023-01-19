@@ -24,3 +24,4 @@ src_repos:
   web-wallet: ["nodejs", "docker", "chart"]
   proof-of-sats: ["nodejs", "docker", "chart"]
   galoy-cli: ["rust"]
+  sqlx-ledger: ["rust", "docker"]
