@@ -25,3 +25,4 @@ src_repos:
   proof-of-sats: ["nodejs", "docker", "chart"]
   galoy-cli: ["rust"]
   sqlx-ledger: ["rust", "docker"]
+  sqlxmq-executor: ["rust", "docker"]
