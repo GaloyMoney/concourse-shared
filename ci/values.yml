@@ -26,3 +26,4 @@ src_repos:
   galoy-cli: ["rust"]
   sqlx-ledger: ["rust", "docker"]
   sqlxmq-executor: ["rust", "docker"]
+  bria: ["rust", "docker", "chart"]
