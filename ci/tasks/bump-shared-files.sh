@@ -44,7 +44,10 @@ popd
 mv ci/vendor/config/*-dependabot.yml .github/dependabot.yml || true
 
 if [[ ! -f ./typos.toml ]]; then
-  touch typos.toml
+  cat <<EOF > typos.toml
+[files]
+extend-exclude = ["CHANGELOG.md"]
+EOF
 fi
 
 if [[ -z $(git config --global user.email) ]]; then
