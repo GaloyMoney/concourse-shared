@@ -37,3 +37,7 @@ RUN mkdir ghcli && cd ghcli \
 ENV BUF_VERSION 1.4.0
 RUN wget https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-x86_64 -O buf \
   && chmod +x buf && mv buf /usr/local/bin
+  
+ RUN git clone https://github.com/bats-core/bats-core.git \
+  && cd bats-core \
+  && ./install.sh /usr/local
