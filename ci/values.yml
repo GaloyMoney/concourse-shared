@@ -27,3 +27,4 @@ src_repos:
   sqlx-ledger: ["rust", "docker"]
   sqlxmq-executor: ["rust", "docker"]
   bria: ["rust", "docker", "chart"]
+  galoy-mobile: ["nodejs"]
