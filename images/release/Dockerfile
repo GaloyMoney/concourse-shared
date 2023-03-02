@@ -46,3 +46,6 @@ RUN mkdir ghcli && cd ghcli \
   && wget https://github.com/cli/cli/releases/download/v${GH_CLI_VERSION}/gh_${GH_CLI_VERSION}_linux_386.tar.gz -O ghcli.tar.gz \
   && tar --strip-components=1 -xf ghcli.tar.gz \
   && mv bin/gh /usr/local/bin && cd ../ && rm -rf ./ghcli
+
+RUN wget https://raw.githubusercontent.com/Ariel-Rodriguez/sh-semversion-2/main/semver2.sh \
+  && chmod +x semver2.sh && mv semver2.sh /usr/local/bin/semver-compare
