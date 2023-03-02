@@ -40,3 +40,9 @@ RUN git config --global user.email "bot@galoy.io" \
   && git config --global user.name "CI Bot"
 
 RUN pip install --upgrade bump2version
+
+ENV GH_CLI_VERSION 2.23.0
+RUN mkdir ghcli && cd ghcli \
+  && wget https://github.com/cli/cli/releases/download/v${GH_CLI_VERSION}/gh_${GH_CLI_VERSION}_linux_386.tar.gz -O ghcli.tar.gz \
+  && tar --strip-components=1 -xf ghcli.tar.gz \
+  && mv bin/gh /usr/local/bin && cd ../ && rm -rf ./ghcli
