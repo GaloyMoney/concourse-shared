@@ -51,3 +51,4 @@ RUN wget https://raw.githubusercontent.com/Ariel-Rodriguez/sh-semversion-2/main/
   && chmod +x semver2.sh && mv semver2.sh /usr/local/bin/semver-compare
 
 RUN curl -sSL https://sdk.cloud.google.com | bash
+ENV PATH $PATH:/root/google-cloud-sdk/bin
