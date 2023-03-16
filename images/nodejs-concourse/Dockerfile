@@ -1,5 +1,7 @@
 FROM node:18-bullseye
 
+RUN npm install -g @graphql-inspector/cli
+
 RUN apt-get update && apt-get install -y \
   make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler
 
