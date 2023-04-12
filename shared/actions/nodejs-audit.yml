@@ -1,15 +1,17 @@
-name: "Nodejs Audit"
-
+name: "Audit"
 on:
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 jobs:
-  integration:
-    name: Nodejs Audit
+  audit:
+    name: Audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-      - name: Run ci audit task
-        run: ./ci/vendor/tasks/nodejs-audit.sh
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+      - run: yarn install --frozen-lockfile
+      - name: Run audit
+        run: make audit
