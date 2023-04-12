@@ -22,10 +22,10 @@ pushd ci
 vendir sync
 
 pushd vendor/tasks
-rename 's/^nodejs-//' *
-rename 's/^rust-//' *
-rename 's/^docker-//' *
-rename 's/^chart-//' *
+rename -f 's/^nodejs-//' *
+rename -f 's/^rust-//' *
+rename -f 's/^docker-//' *
+rename -f 's/^chart-//' *
 chmod +x *
 popd
 
@@ -34,10 +34,10 @@ popd
 pushd .github/workflows
 cp -r vendor/* .
 
-rename 's/^nodejs-//' *
-rename 's/^rust-//' *
-rename 's/^docker-//' *
-rename 's/^chart-//' *
+rename -f 's/^nodejs-//' *
+rename -f 's/^rust-//' *
+rename -f 's/^docker-//' *
+rename -f 's/^chart-//' *
 
 popd
 
