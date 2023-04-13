@@ -2,6 +2,7 @@
 #! Don't change this file, instead change it in github.com/GaloyMoney/concourse-shared
 
 name: Audit
+
 on:
   pull_request:
     branches: [ main ]
