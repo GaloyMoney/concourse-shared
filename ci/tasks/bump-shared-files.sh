@@ -32,6 +32,7 @@ popd
 popd
 
 pushd .github/workflows
+
 cp -r vendor/* .
 
 rename -f 's/^nodejs-//' *
