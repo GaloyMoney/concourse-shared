@@ -21,14 +21,6 @@ done
 pushd ci
 vendir sync
 
-pushd vendor/tasks
-rename -f 's/^nodejs-//' *
-rename -f 's/^rust-//' *
-rename -f 's/^docker-//' *
-rename -f 's/^chart-//' *
-chmod +x *
-popd
-
 popd
 
 pushd .github/workflows
