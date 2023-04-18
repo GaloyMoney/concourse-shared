@@ -21,6 +21,13 @@ done
 pushd ci
 vendir sync
 
+pushd vendor/tasks
+
+mv nodejs-helpers.sh helpers.sh
+mv rust-helpers.sh helpers.sh
+
+popd
+
 popd
 
 pushd .github/workflows
