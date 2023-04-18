@@ -23,8 +23,8 @@ vendir sync
 
 pushd vendor/tasks
 
-mv nodejs-helpers.sh helpers.sh
-mv rust-helpers.sh helpers.sh
+mv nodejs-helpers.sh helpers.sh || true
+mv rust-helpers.sh helpers.sh || true
 
 popd
 
