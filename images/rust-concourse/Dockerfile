@@ -12,7 +12,7 @@ RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 
 RUN apt-get update && apt-get install -y \
-  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler
+  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler bc
 
 ENV YQ_VERSION 4.31.1
 RUN wget https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_386.tar.gz -O - |\
