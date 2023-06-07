@@ -148,7 +148,7 @@ plan:
       TEST_CONTAINER: #@ container
       JEST_TIMEOUT: 90000
     run:
-      path: pipeline-tasks/ci/tasks/test-on-docker-host.sh
+      path: pipeline-tasks/ci/vendor/tasks/test-on-docker-host.sh
   ensure:
     put: docker-host
     params:
