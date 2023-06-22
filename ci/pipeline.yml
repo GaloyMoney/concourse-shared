@@ -153,6 +153,7 @@ jobs:
 resources:
 - name: shared-files
   type: git
+  webhook_token: ((webhook.secret))
   source:
     paths:
     - shared/**/*
