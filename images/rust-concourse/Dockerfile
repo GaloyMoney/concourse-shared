@@ -30,7 +30,7 @@ RUN mkdir -p /usr/local/lib/docker/cli-plugins \
   && curl -SL https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose \
   && chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
-ENV GH_CLI_VERSION 2.23.0
+ENV GH_CLI_VERSION 2.31.0
 RUN mkdir ghcli && cd ghcli \
   && wget https://github.com/cli/cli/releases/download/v${GH_CLI_VERSION}/gh_${GH_CLI_VERSION}_linux_386.tar.gz -O ghcli.tar.gz \
   && tar --strip-components=1 -xf ghcli.tar.gz \
@@ -43,3 +43,10 @@ RUN wget https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-L
  RUN git clone https://github.com/bats-core/bats-core.git \
   && cd bats-core \
   && ./install.sh /usr/local
+
+RUN wget -O ghtoken \
+    https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
+    echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
+    shasum -c - && \
+    chmod u+x ./ghtoken && \
+    mv ./ghtoken /usr/local/bin/ghtoken

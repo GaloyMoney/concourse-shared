@@ -43,3 +43,10 @@ RUN apt-get update && apt-get install -y dirmngr gnupg apt-transport-https softw
 RUN git clone https://github.com/bats-core/bats-core.git \
  && cd bats-core \
  && ./install.sh /usr/local
+
+RUN wget -O ghtoken \
+    https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
+    echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
+    shasum -c - && \
+    chmod u+x ./ghtoken && \
+    mv ./ghtoken /usr/local/bin/ghtoken
