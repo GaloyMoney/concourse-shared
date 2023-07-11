@@ -3,7 +3,7 @@ FROM node:20-bookworm
 RUN npx @graphql-inspector/cli@latest --global
 
 RUN apt-get update && apt-get install -y \
-  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler
+  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler build-essentials
 
 RUN wget https://github.com/mikefarah/yq/releases/download/v4.17.2/yq_linux_386.tar.gz -O - |\
   tar xz && mv yq_linux_386 /usr/bin/yq
@@ -53,6 +53,6 @@ RUN wget -O ghtoken \
 
 RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux.tar.gz \
   && echo "6b0740c3f4c7134a0cbcf802b95b033bd2246d592ad16aa2ee2d80e5b289b4d6  jwt-linux.tar.gz" > jwt-linux.sha256 \
-  && shasum --check --status ./jwt-linux.sha256
+  && shasum --check --status ./jwt-linux.sha256 \
   && tar -xzf jwt-linux.tar.gz \
   && mv jwt /usr/local/bin/jwt
