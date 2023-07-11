@@ -1,4 +1,4 @@
-FROM node:20-bullseye
+FROM node:20-bookworm
 
 RUN npx @graphql-inspector/cli@latest --global
 
