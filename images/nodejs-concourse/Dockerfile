@@ -3,7 +3,7 @@ FROM node:20-bookworm
 RUN npx @graphql-inspector/cli@latest --global
 
 RUN apt-get update && apt-get install -y \
-  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler build-essentials
+  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler build-essential
 
 RUN wget https://github.com/mikefarah/yq/releases/download/v4.17.2/yq_linux_386.tar.gz -O - |\
   tar xz && mv yq_linux_386 /usr/bin/yq
