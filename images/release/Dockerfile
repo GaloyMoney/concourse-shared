@@ -57,5 +57,11 @@ RUN wget -O ghtoken \
      chmod u+x ./ghtoken && \
      mv ./ghtoken /usr/local/bin/ghtoken
 
+RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux.tar.gz \
+  && echo "6b0740c3f4c7134a0cbcf802b95b033bd2246d592ad16aa2ee2d80e5b289b4d6  jwt-linux.tar.gz" > jwt-linux.sha256 \
+  && shasum --check --status ./jwt-linux.sha256 \
+  && tar -xzf jwt-linux.tar.gz \
+  && mv jwt /usr/local/bin/jwt
+
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
