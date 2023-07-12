@@ -1,7 +1,7 @@
 FROM python:alpine
 
 RUN apk update \
-  && apk add bash curl wget tar git gettext jq \
+  && apk add bash curl wget tar git gettext jq perl-utils \
   && apk add yq --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 ARG GIT_CLIFF_VERSION=1.2.0
