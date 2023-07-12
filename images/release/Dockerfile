@@ -50,5 +50,12 @@ RUN mkdir ghcli && cd ghcli \
 RUN wget https://raw.githubusercontent.com/Ariel-Rodriguez/sh-semversion-2/main/semver2.sh \
   && chmod +x semver2.sh && mv semver2.sh /usr/local/bin/semver-compare
 
+RUN wget -O ghtoken \
+     https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
+     echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
+     shasum -c - && \
+     chmod u+x ./ghtoken && \
+     mv ./ghtoken /usr/local/bin/ghtoken
+
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
