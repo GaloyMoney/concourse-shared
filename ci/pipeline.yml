@@ -145,7 +145,8 @@ jobs:
       params:
         PR_BRANCH: #@ data.values.pr_branch
         BRANCH: #@ data.values.source_repo_branch
-        GH_TOKEN: #@ data.values.github_token
+        GH_APP_ID: #@ data.values.github_app_id
+        GH_APP_PRIVATE_KEY: #@ data.values.github_app_private_key
       run:
         path: pipeline-tasks/ci/tasks/open-pr.sh
 #@ end

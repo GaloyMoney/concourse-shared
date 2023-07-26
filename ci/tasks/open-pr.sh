@@ -2,6 +2,8 @@
 
 set -eu
 
+export GH_TOKEN="$(ghtoken generate -b "${GH_APP_PRIVATE_KEY}" -i "${GH_APP_ID}" | jq -r '.token')"
+
 pushd source-repo
 
 cat <<EOF >> ../body.md
