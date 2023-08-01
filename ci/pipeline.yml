@@ -30,6 +30,7 @@ groups:
   jobs:
   - build-rust-concourse-image
   - build-nodejs-concourse-image
+  - build-wincross-pipeline-image
   - build-release-pipeline-image
 
 jobs:
@@ -103,6 +104,31 @@ jobs:
       run:
         path: build
   - put: release-pipeline-image
+    params:
+      image: image/image.tar
+
+- name: build-wincross-pipeline-image
+  serial: true
+  plan:
+  - get: wincross-pipeline-image-def
+    trigger: true
+  - task: build
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: wincross-pipeline-image-def
+      outputs:
+      - name: image
+      params:
+        CONTEXT: wincross-pipeline-image-def/images/wincross
+      run:
+        path: build
+  - put: wincross-pipeline-image
     params:
       image: image/image.tar
 
@@ -234,6 +260,22 @@ resources:
   type: git
   source:
     paths: [images/release/Dockerfile]
+    uri: #@ data.values.git_uri
+    branch: #@ data.values.git_branch
+    private_key: #@ data.values.github_private_key
+
+- name: wincross-pipeline-image
+  type: registry-image
+  source:
+    tag: latest
+    username: #@ data.values.docker_registry_user
+    password: #@ data.values.docker_registry_password
+    repository: #@   data.values.docker_registry + "/wincross-rust"
+
+- name: wincross-pipeline-image-def
+  type: git
+  source:
+    paths: [images/wincross/Dockerfile]
     uri: #@ data.values.git_uri
     branch: #@ data.values.git_branch
     private_key: #@ data.values.github_private_key
