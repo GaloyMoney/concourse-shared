@@ -4,8 +4,8 @@ RUN apt-get update \
   && apt-get install -y bash curl wget tar git gettext jq perl \
   && apt-get clean
 
-# There is no equivalent for yq on Ubuntu so it's installed via pip
-RUN pip install yq
+RUN wget https://github.com/mikefarah/yq/releases/download/v4.17.2/yq_linux_386.tar.gz -O - |\
+  tar xz && mv yq_linux_386 /usr/bin/yq
 
 ARG GIT_CLIFF_VERSION=1.2.0
 RUN wget https://github.com/orhun/git-cliff/releases/download/v${GIT_CLIFF_VERSION}/git-cliff-${GIT_CLIFF_VERSION}-x86_64-unknown-linux-gnu.tar.gz \
