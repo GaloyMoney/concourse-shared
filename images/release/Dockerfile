@@ -21,7 +21,7 @@ RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
   && chmod +x /usr/local/bin/helm \
   && rm -rf linux-amd64 helm-*
 
-ARG CR_VERSION=1.3.0
+ARG CR_VERSION=1.6.0
 RUN wget https://github.com/helm/chart-releaser/releases/download/v${CR_VERSION}/chart-releaser_${CR_VERSION}_linux_amd64.tar.gz \
   && tar -zxvf chart-releaser_${CR_VERSION}_linux_amd64.tar.gz \
   && mv cr /usr/local/bin \
