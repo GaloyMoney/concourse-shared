@@ -30,3 +30,4 @@ src_repos:
   sqlxmq-executor: ["rust", "docker"]
   bria: ["rust", "docker", "chart"]
   galoy-mobile: ["nodejs"]
+  blink-circles: ["nodejs", "docker", "chart"]
