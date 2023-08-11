@@ -66,5 +66,7 @@ RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux
   && tar -xzf jwt-linux.tar.gz \
   && mv jwt /usr/local/bin/jwt
 
+RUN wget -O- https://carvel.dev/install.sh | bash
+
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
