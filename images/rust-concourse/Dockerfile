@@ -12,7 +12,7 @@ RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 
 RUN apt-get update && apt-get install -y \
-  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler bc
+  make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler bc xxd
 
 ENV YQ_VERSION 4.31.1
 RUN wget https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_386.tar.gz -O - |\
@@ -22,8 +22,8 @@ RUN apt-get remove -y docker docker.io runc
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 RUN echo  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
-   && apt-get update \
-   && apt-get install -y docker-ce docker-ce-cli containerd.io
+  && apt-get update \
+  && apt-get install -y docker-ce docker-ce-cli containerd.io
 
 ENV DOCKER_COMPOSE_VERSION 2.16.0
 RUN mkdir -p /usr/local/lib/docker/cli-plugins \
@@ -39,14 +39,14 @@ RUN mkdir ghcli && cd ghcli \
 ENV BUF_VERSION 1.4.0
 RUN wget https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-x86_64 -O buf \
   && chmod +x buf && mv buf /usr/local/bin
-  
- RUN git clone https://github.com/bats-core/bats-core.git \
+
+RUN git clone https://github.com/bats-core/bats-core.git \
   && cd bats-core \
   && ./install.sh /usr/local
 
 RUN wget -O ghtoken \
-    https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
-    echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
-    shasum -c - && \
-    chmod u+x ./ghtoken && \
-    mv ./ghtoken /usr/local/bin/ghtoken
+  https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
+  echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
+  shasum -c - && \
+  chmod u+x ./ghtoken && \
+  mv ./ghtoken /usr/local/bin/ghtoken
