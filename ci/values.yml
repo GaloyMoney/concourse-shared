@@ -31,3 +31,4 @@ src_repos:
   bria: ["rust", "docker", "chart"]
   galoy-mobile: ["nodejs"]
   blink-circles: ["nodejs", "docker", "chart"]
+  blink-fiat: ["nodejs", "docker", "chart"]
