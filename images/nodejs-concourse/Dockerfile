@@ -1,6 +1,7 @@
 FROM node:20-bookworm
 
 RUN npx @graphql-inspector/cli@latest --global
+RUN npm install -g pnpm
 
 RUN apt-get update && apt-get install -y \
   make git curl python3 jq rsync wget ca-certificates gnupg lsb-release gettext-base protobuf-compiler build-essential postgresql
