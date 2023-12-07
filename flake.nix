@@ -25,8 +25,9 @@
 
             vendorHash = "sha256-QiaGdHpDeuiX6QDLX2G4rx73QasWwQ3q8BYbv/Tws8c=";
           };
-          default = gh-token;
         };
+
+        devShells.default = mkShell {};
       }
     );
 }
