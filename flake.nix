@@ -1,5 +1,5 @@
 {
-  description = "A flake for gh-token";
+  description = "Utils";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
