@@ -18,8 +18,6 @@ source_repo_branch: main
 
 src_repos:
   galoy: ["nodejs", "docker", "chart"]
-  admin-panel: ["nodejs", "docker", "chart"]
-  galoy-pay: ["nodejs", "docker", "chart"]
   stablesats-rs: ["rust", "docker", "chart"]
   proof-of-sats: ["nodejs", "docker", "chart"]
   galoy-cli: ["rust"]
