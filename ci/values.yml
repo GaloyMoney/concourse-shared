@@ -28,4 +28,3 @@ src_repos:
   blink-circles: ["nodejs", "docker", "chart"]
   blink-fiat: ["nodejs", "docker", "chart"]
   blink-kyc: ["nodejs", "docker", "chart"]
-  post-print-companion: ["nodejs"]
