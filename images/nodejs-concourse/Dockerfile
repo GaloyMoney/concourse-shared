@@ -1,6 +1,6 @@
 FROM node:20-bookworm
 
-RUN npx @graphql-inspector/cli@latest --global
+RUN npm i --global @graphql-inspector/cli graphql
 RUN npm install -g pnpm
 
 RUN apt-get update && apt-get install -y \
@@ -34,23 +34,17 @@ ENV BUF_VERSION 1.4.0
 RUN wget https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-x86_64 -O buf \
   && chmod +x buf && mv buf /usr/local/bin
 
-# Install mongodb client
-RUN apt-get update && apt-get install -y dirmngr gnupg apt-transport-https software-properties-common ca-certificates curl && \
-    curl -fsSL https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - && \
-    echo "deb [arch=$(dpkg --print-architecture)] https://repo.mongodb.org/apt/debian bullseye/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    apt-get update && \
-    apt-get install -y mongodb-mongosh
-
 RUN git clone https://github.com/bats-core/bats-core.git \
  && cd bats-core \
  && ./install.sh /usr/local
 
+ENV GHTOKEN_VERSION 2.0.1
 RUN wget -O ghtoken \
-    https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
-    echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
-    shasum -c - && \
-    chmod u+x ./ghtoken && \
-    mv ./ghtoken /usr/local/bin/ghtoken
+  https://github.com/Link-/gh-token/releases/download/v2.0.1/linux-amd64 && \
+  echo "f76e8cb35f0b04b59073a486cc952e50fa9f1c930a25619ea9abcf44a13165c4  ghtoken" | \
+  shasum -c - && \
+  chmod u+x ./ghtoken && \
+  mv ./ghtoken /usr/local/bin/ghtoken
 
 RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux.tar.gz \
   && echo "6b0740c3f4c7134a0cbcf802b95b033bd2246d592ad16aa2ee2d80e5b289b4d6  jwt-linux.tar.gz" > jwt-linux.sha256 \
