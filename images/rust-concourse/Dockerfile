@@ -8,6 +8,7 @@ RUN rustup component add clippy
 RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli sqlx-cli handlebars-cli
 
 # Install gcloud
+ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 
@@ -44,9 +45,10 @@ RUN git clone https://github.com/bats-core/bats-core.git \
   && cd bats-core \
   && ./install.sh /usr/local
 
+ENV GHTOKEN_VERSION 2.0.1
 RUN wget -O ghtoken \
-  https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
-  echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
+  https://github.com/Link-/gh-token/releases/download/v2.0.1/linux-amd64 && \
+  echo "f76e8cb35f0b04b59073a486cc952e50fa9f1c930a25619ea9abcf44a13165c4  ghtoken" | \
   shasum -c - && \
   chmod u+x ./ghtoken && \
   mv ./ghtoken /usr/local/bin/ghtoken

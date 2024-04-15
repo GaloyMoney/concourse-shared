@@ -68,5 +68,6 @@ RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux
 
 RUN wget -O- https://carvel.dev/install.sh | bash
 
+ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
