@@ -8,6 +8,7 @@ RUN rustup component add clippy
 RUN cargo install cargo-nextest cargo-deny cargo-audit typos-cli sqlx-cli handlebars-cli
 
 # Install gcloud
+ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 

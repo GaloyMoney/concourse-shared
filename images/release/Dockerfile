@@ -53,12 +53,13 @@ RUN mkdir ghcli && cd ghcli \
 RUN wget https://raw.githubusercontent.com/Ariel-Rodriguez/sh-semversion-2/main/semver2.sh \
   && chmod +x semver2.sh && mv semver2.sh /usr/local/bin/semver-compare
 
+ENV GHTOKEN_VERSION 2.0.1
 RUN wget -O ghtoken \
-     https://raw.githubusercontent.com/Link-/gh-token/main/gh-token && \
-     echo "6a6b111355432e08dd60ac0da148e489cdb0323a059ee8cbe624fd37bf2572ae  ghtoken" | \
-     shasum -c - && \
-     chmod u+x ./ghtoken && \
-     mv ./ghtoken /usr/local/bin/ghtoken
+  https://github.com/Link-/gh-token/releases/download/v2.0.1/linux-amd64 && \
+  echo "f76e8cb35f0b04b59073a486cc952e50fa9f1c930a25619ea9abcf44a13165c4  ghtoken" | \
+  shasum -c - && \
+  chmod u+x ./ghtoken && \
+  mv ./ghtoken /usr/local/bin/ghtoken
 
 RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux.tar.gz \
   && echo "6b0740c3f4c7134a0cbcf802b95b033bd2246d592ad16aa2ee2d80e5b289b4d6  jwt-linux.tar.gz" > jwt-linux.sha256 \
@@ -68,5 +69,6 @@ RUN wget https://github.com/mike-engel/jwt-cli/releases/download/4.0.0/jwt-linux
 
 RUN wget -O- https://carvel.dev/install.sh | bash
 
+ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin

@@ -21,6 +21,7 @@ RUN mkdir -p /usr/local/lib/docker/cli-plugins \
   && chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 # Install gcloud
+ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 

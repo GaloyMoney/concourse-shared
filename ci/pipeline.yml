@@ -39,21 +39,27 @@ jobs:
   plan:
   - {get: rust-image-def, trigger: true}
   - task: build
-    privileged: true
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: vito/oci-build-task
+          repository: gcr.io/kaniko-project/executor
+          tag: debug
       inputs:
       - name: rust-image-def
       outputs:
       - name: image
-      params:
-        CONTEXT: rust-image-def/images/rust-concourse
       run:
-        path: build
+        path: /kaniko/executor
+        args:
+          - --dockerfile=Dockerfile
+          - --context=rust-image-def/images/rust-concourse
+          - --use-new-run
+          - --single-snapshot
+          - --cache=false
+          - --no-push
+          - --tar-path=image/image.tar
   - put: rust-image
     params:
       image: image/image.tar
@@ -63,21 +69,27 @@ jobs:
   plan:
   - {get: nodejs-image-def, trigger: true}
   - task: build
-    privileged: true
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: vito/oci-build-task
+          repository: gcr.io/kaniko-project/executor
+          tag: debug
       inputs:
       - name: nodejs-image-def
       outputs:
       - name: image
-      params:
-        CONTEXT: nodejs-image-def/images/nodejs-concourse
       run:
-        path: build
+        path: /kaniko/executor
+        args:
+          - --dockerfile=Dockerfile
+          - --context=nodejs-image-def/images/nodejs-concourse
+          - --use-new-run
+          - --single-snapshot
+          - --cache=false
+          - --no-push
+          - --tar-path=image/image.tar
   - put: nodejs-image
     params:
       image: image/image.tar
@@ -88,21 +100,27 @@ jobs:
   - get: release-pipeline-image-def
     trigger: true
   - task: build
-    privileged: true
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: vito/oci-build-task
+          repository: gcr.io/kaniko-project/executor
+          tag: debug
       inputs:
       - name: release-pipeline-image-def
       outputs:
       - name: image
-      params:
-        CONTEXT: release-pipeline-image-def/images/release
       run:
-        path: build
+        path: /kaniko/executor
+        args:
+          - --dockerfile=Dockerfile
+          - --context=release-pipeline-image-def/images/release
+          - --use-new-run
+          - --single-snapshot
+          - --cache=false
+          - --no-push
+          - --tar-path=image/image.tar
   - put: release-pipeline-image
     params:
       image: image/image.tar
@@ -247,7 +265,7 @@ resources:
     username: #@ data.values.docker_registry_user
     password: #@ data.values.docker_registry_password
     repository: #@ data.values.docker_registry + "/rust-concourse"
-  
+
 - name: release-pipeline-image
   type: registry-image
   source:
