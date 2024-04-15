@@ -131,21 +131,27 @@ jobs:
   - get: wincross-pipeline-image-def
     trigger: true
   - task: build
-    privileged: true
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: vito/oci-build-task
+          repository: gcr.io/kaniko-project/executor
+          tag: debug
       inputs:
       - name: wincross-pipeline-image-def
       outputs:
       - name: image
-      params:
-        CONTEXT: wincross-pipeline-image-def/images/wincross
       run:
-        path: build
+        path: /kaniko/executor
+        args:
+          - --dockerfile=Dockerfile
+          - --context=wincross-pipeline-image-def/images/wincross
+          - --use-new-run
+          - --single-snapshot
+          - --cache=false
+          - --no-push
+          - --tar-path=image/image.tar
   - put: wincross-pipeline-image
     params:
       image: image/image.tar
