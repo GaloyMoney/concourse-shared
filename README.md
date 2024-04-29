@@ -53,8 +53,7 @@ Files whose names don't start with them are treated as common and synced to all.
 #### rust
 
 - GH Actions:
-  - Check Code (`make check-code` after `yarn install`)
-  - Audit (`make audit` after `yarn install`)
+  - Check Code (`make check-code`)
 
 - Concourse CI:
   - Helpers (Some `CARGO_` envs)
