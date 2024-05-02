@@ -34,8 +34,8 @@
 
           devShells.default = mkShell {
             nativeBuildInputs = [
-              pkgs.ytt
-              pkgs.alejandra
+              ytt
+              alejandra
             ];
           };
           formatter = alejandra;
