@@ -25,6 +25,7 @@ src_repos:
   sqlxmq-executor: ["rust", "docker"]
   bria: ["rust", "docker", "chart"]
   cala: ["rust", "docker"]
+  cala-enterprise: ["rust", "docker"]
   galoy-mobile: ["nodejs"]
   blink-circles: ["nodejs", "docker", "chart"]
   blink-fiat: ["nodejs", "docker", "chart"]
