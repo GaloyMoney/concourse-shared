@@ -26,6 +26,7 @@ src_repos:
   bria: ["rust", "docker", "chart"]
   cala: ["rust", "docker"]
   cala-enterprise: ["rust", "docker"]
+  lava-bank: ["rust", "docker"]
   galoy-mobile: ["nodejs"]
   blink-circles: ["nodejs", "docker", "chart"]
   blink-fiat: ["nodejs", "docker", "chart"]
