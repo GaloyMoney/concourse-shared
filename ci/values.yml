@@ -11,6 +11,9 @@ github_app_private_key: ((github.github_app_private_key))
 docker_registry: us.gcr.io/galoy-org
 docker_registry_user: ((docker-creds.username))
 docker_registry_password: ((docker-creds.password))
+container_image: k3ys/galoy-test
+staging_inception_creds: ((staging-gcp-creds.creds_json))
+staging_bucket_name: ((staging-gcp-creds.bucket_name))
 
 git_org_uri: git@github.com:GaloyMoney
 pr_branch: bump-shared-tasks

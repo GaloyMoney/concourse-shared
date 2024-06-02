@@ -157,16 +157,17 @@ jobs:
   - task: gcp-backup
     config:
       platform: linux
-      image_resource: #@ task_image_config()
+      image_resource: 
+        type: registry-image
+        source:
+          repository: #@ data.values.container_image
       inputs:
       - name: pipeline-tasks
       - name: #@ repo_resource_name(repo)
-        path: source-repo
       params:
-        PR_BRANCH: #@ data.values.pr_branch
-        BRANCH: #@ data.values.source_repo_branch
-        GH_APP_ID: #@ data.values.github_app_id
-        GH_APP_PRIVATE_KEY: #@ data.values.github_app_private_key
+        GOOGLE_CREDENTIALS: #@ data.values.staging_inception_creds 
+        GOOGLE_BUCKET_NAME: #@ data.values.staging_bucket_name
+        BACKUP_REPO_NAME: #@ repo
       run:
         args: pipeline-tasks/ci/tasks/gcp-backup.sh
 #@ end
