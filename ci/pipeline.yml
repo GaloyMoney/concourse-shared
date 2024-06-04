@@ -34,9 +34,7 @@ groups:
   - build-release-pipeline-image
 - name: backups
   jobs:
-#@ for repo in data.values.src_repos:
-  - #@ "backup-" + repo
-#@ end
+  - backup-org-to-gcp
 
 #@ def build_task(input_name, context_path):
 task: build
@@ -147,13 +145,11 @@ jobs:
         path: pipeline-tasks/ci/tasks/open-pr.sh
 #@ end
 
-#@ for repo in data.values.src_repos:
-- name: #@ "backup-" + repo
+- name: backup-org-to-gcp
   plan:
   - in_parallel:
     - { get: every-day-trigger, trigger: true }
     - { get: pipeline-tasks }
-    - get: #@ repo_resource_name(repo)
   - task: gcp-backup
     config:
       platform: linux
@@ -163,14 +159,14 @@ jobs:
           repository: #@ data.values.container_image
       inputs:
       - name: pipeline-tasks
-      - name: #@ repo_resource_name(repo)
       params:
         GOOGLE_CREDENTIALS: #@ data.values.staging_inception_creds 
         GOOGLE_BUCKET_NAME: #@ data.values.staging_bucket_name
-        BACKUP_REPO_NAME: #@ repo
+        GH_APP_ID: #@ data.values.github_app_id
+        GH_APP_PRIVATE_KEY: #@ data.values.github_app_private_key
       run:
         args: pipeline-tasks/ci/tasks/gcp-backup.sh
-#@ end
+
 resources:
 - name: shared-files
   type: git
