@@ -165,7 +165,7 @@ jobs:
         GH_APP_ID: #@ data.values.github_app_id
         GH_APP_PRIVATE_KEY: #@ data.values.github_app_private_key
       run:
-        args: pipeline-tasks/ci/tasks/gcp-backup.sh
+        path: pipeline-tasks/ci/tasks/gcp-backup.sh
 
 resources:
 - name: shared-files
