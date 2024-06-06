@@ -23,9 +23,4 @@ timestamp=$(date +%Y%m%d%H%M%S)
 backup_name="${ORG_NAME}-${timestamp}.tar.gz"
 tar -czf "${backup_name}" ${ORG_NAME}
 
-gcloud storage cp "${backup_name}" gs://${GOOGLE_BUCKET_NAME}
-
-# cleanup step
-rm "${backup_name}"
-rm "${ORG_NAME}"
-
+gcloud storage cp "${backup_name}" gs://${GOOGLE_BUCKET_NAME}/org_backup/
