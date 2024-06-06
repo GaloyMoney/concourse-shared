@@ -28,3 +28,4 @@ gcloud storage cp "${backup_name}" gs://${GOOGLE_BUCKET_NAME}
 # cleanup step
 rm "${backup_name}"
 rm "${ORG_NAME}"
+
