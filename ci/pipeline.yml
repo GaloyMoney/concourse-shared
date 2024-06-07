@@ -32,6 +32,9 @@ groups:
   - build-nodejs-concourse-image
   - build-wincross-pipeline-image
   - build-release-pipeline-image
+- name: backups
+  jobs:
+  - backup-org-to-gcp
 
 #@ def build_task(input_name, context_path):
 task: build
@@ -142,6 +145,28 @@ jobs:
         path: pipeline-tasks/ci/tasks/open-pr.sh
 #@ end
 
+- name: backup-org-to-gcp
+  plan:
+  - in_parallel:
+    - { get: every-day-trigger, trigger: true }
+    - { get: pipeline-tasks }
+  - task: gcp-backup
+    config:
+      platform: linux
+      image_resource: 
+        type: registry-image
+        source:
+          repository: us.gcr.io/galoy-org/galoy-dev
+      inputs:
+      - name: pipeline-tasks
+      params:
+        GOOGLE_CREDENTIALS: #@ data.values.staging_inception_creds 
+        GOOGLE_BUCKET_NAME: #@ data.values.staging_bucket_name
+        GH_APP_ID: #@ data.values.github_app_id
+        GH_APP_PRIVATE_KEY: #@ data.values.github_app_private_key
+      run:
+        path: pipeline-tasks/ci/tasks/gcp-backup.sh
+
 resources:
 - name: shared-files
   type: git
@@ -244,3 +269,9 @@ resources:
     uri: #@ data.values.git_uri
     branch: #@ data.values.git_branch
     private_key: #@ data.values.github_private_key
+
+- name: every-day-trigger
+  type: time
+  icon: clock-outline
+  source:
+    interval: 24h
