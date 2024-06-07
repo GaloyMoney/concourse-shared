@@ -156,7 +156,7 @@ jobs:
       image_resource: 
         type: registry-image
         source:
-          repository: #@ data.values.container_image
+          repository: us.gcr.io/galoy-org/galoy-dev
       inputs:
       - name: pipeline-tasks
       params:
