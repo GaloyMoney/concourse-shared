@@ -67,7 +67,6 @@ plan:
 - in_parallel:
   - { get: repo, trigger: true }
   - { get: pipeline-tasks }
-  - { get: bundled-deps, trigger: true}
 - task: check-code
   config:
     platform: linux
