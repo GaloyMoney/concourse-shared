@@ -24,7 +24,6 @@ src_repos:
   stablesats-rs: ["rust", "docker", "chart"]
   proof-of-sats: ["nodejs", "docker", "chart"]
   galoy-cli: ["rust"]
-  sqlx-ledger: ["rust", "docker"]
   sqlxmq-executor: ["rust", "docker"]
   bria: ["rust", "docker", "chart"]
   cala: ["rust", "docker"]
