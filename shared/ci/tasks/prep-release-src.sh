@@ -39,7 +39,7 @@ echo ""
 if [[ $(cat version/version) == "0.0.0" ]]; then
   echo "0.1.0" > version/version
 # Figure out proper version to release
-elif [[ $(cat artifacts/gh-release-notes.md | grep breaking) != '' ]] || [[ $(cat artifacts/gh-release-notes.md | grep feature) != '' ]]; then
+elif [[ $(cat artifacts/gh-release-notes.md | grep Breaking) != '' ]] || [[ $(cat artifacts/gh-release-notes.md | grep Feature) != '' ]]; then
   echo "Breaking change / Feature Addition found, bumping minor version..."
   bump2version minor --current-version $(cat version/version) --allow-dirty version/version
 else
